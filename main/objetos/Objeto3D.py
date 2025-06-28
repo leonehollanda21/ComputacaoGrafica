@@ -19,3 +19,4 @@ class Objeto3D:
             vertices_transformados.append(v_transformado)
 
         return [v[:3] for v in vertices_transformados]
+
