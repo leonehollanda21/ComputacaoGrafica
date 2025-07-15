@@ -83,5 +83,28 @@ def criar_matriz_rotacao_y(angulo_rad):
     ]
 
 
+def produto_escalar(v1, v2):
+    return v1[0] * v2[0] + v1[1] * v2[1] + v1[2] * v2[2]
+
+
+def criar_matriz_view(pos_camera, ponto_alvo, vetor_up_mundo):
+    z_cam = normalizar_vetor(subtrair_vetores(pos_camera, ponto_alvo))
+    x_cam = normalizar_vetor(produto_vetorial(vetor_up_mundo, z_cam))
+    y_cam = produto_vetorial(z_cam, x_cam)
+
+    matriz_rotacao_inversa = [
+        [x_cam[0], x_cam[1], x_cam[2], 0],
+        [y_cam[0], y_cam[1], y_cam[2], 0],
+        [z_cam[0], z_cam[1], z_cam[2], 0],
+        [0, 0, 0, 1]
+    ]
+
+    matriz_translacao_inversa = criar_matriz_translacao(
+        -pos_camera[0], -pos_camera[1], -pos_camera[2]
+    )
+
+    matriz_view = multiplicar_matrizes(matriz_rotacao_inversa, matriz_translacao_inversa)
+
+    return matriz_view
 matriz_rot_90_graus_y = criar_matriz_rotacao_y(math.pi / 2)
 
