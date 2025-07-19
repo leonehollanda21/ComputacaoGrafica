@@ -106,5 +106,49 @@ def criar_matriz_view(pos_camera, ponto_alvo, vetor_up_mundo):
     matriz_view = multiplicar_matrizes(matriz_rotacao_inversa, matriz_translacao_inversa)
 
     return matriz_view
+
+
+def criar_matriz_projecao_perspectiva(fov_graus, aspect_ratio, near, far):
+
+    fov_rad = math.radians(fov_graus)
+
+    f = 1.0 / math.tan(fov_rad / 2)
+
+    termo_z1 = (far + near) / (near - far)
+    termo_z2 = (2 * far * near) / (near - far)
+
+    return [
+        [f / aspect_ratio, 0, 0, 0],
+        [0, f, 0, 0],
+        [0, 0, termo_z1, termo_z2],
+        [0, 0, -1, 0]
+    ]
+
+def calcular_coordenadas_baricentricas(ponto, v0, v1, v2):
+
+    # Usando a fórmula baseada em área
+    denominador = (v1[1] - v2[1]) * (v0[0] - v2[0]) + (v2[0] - v1[0]) * (v0[1] - v2[1])
+    if denominador == 0:
+        return None # Triângulo degenerado
+
+    w0 = ((v1[1] - v2[1]) * (ponto[0] - v2[0]) + (v2[0] - v1[0]) * (ponto[1] - v2[1])) / denominador
+    w1 = ((v2[1] - v0[1]) * (ponto[0] - v2[0]) + (v0[0] - v2[0]) * (ponto[1] - v2[1])) / denominador
+    w2 = 1.0 - w0 - w1
+
+    return w0, w1, w2
+
+
+# NOVO: Função para desenhar linhas (Algoritmo de Bresenham)
+def desenhar_linha_bresenham(p1, p2, pixels, cor, largura, altura):
+    x1, y1 = p1; x2, y2 = p2
+    dx = abs(x2 - x1); sx = 1 if x1 < x2 else -1
+    dy = -abs(y2 - y1); sy = 1 if y1 < y2 else -1
+    err = dx + dy
+    while True:
+        if 0 <= x1 < largura and 0 <= y1 < altura: pixels[x1, y1] = cor
+        if x1 == x2 and y1 == y2: break
+        e2 = 2 * err
+        if e2 >= dy: err += dy; x1 += sx
+        if e2 <= dx: err += dx; y1 += sy
 matriz_rot_90_graus_y = criar_matriz_rotacao_y(math.pi / 2)
 

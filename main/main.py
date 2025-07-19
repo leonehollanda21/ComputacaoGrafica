@@ -8,6 +8,8 @@ from main.objetos.cilindro import Cilindro
 from main.objetos.linha_reta import LinhaReta
 from main.objetos.paralelepípedo import Paralelepipedo
 from main.questoes.questao3 import questao3
+from main.questoes.questao4 import questao4
+from main.questoes.questao5 import questao5
 from main.utils import criar_matriz_translacao, criar_matriz_rotacao_y, criar_matriz_view, multiplicar_matriz_por_vetor
 
 meu_paralelepipedo = Paralelepipedo(base=2, altura=2, comprimento=2, cor='cyan')
@@ -78,3 +80,8 @@ ax.view_init(elev=25., azim=-50)
 plt.show()
 
 questao3(objetos_da_cena)
+questao4(objetos_da_cena)
+
+resolucoes_desejadas = [(600, 450), (1200, 900), (2400, 1800)]
+
+questao5(objetos_da_cena, resolucoes_desejadas)
