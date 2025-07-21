@@ -4,7 +4,7 @@ from main.objetos.Objeto3D import Objeto3D
 
 
 class Cilindro(Objeto3D):
-    def __init__(self, raio, altura, segmentos=50, cor='green'):
+    def __init__(self, raio, altura, segmentos=20, cor='green'):
         vertices = []
         faces = []
 

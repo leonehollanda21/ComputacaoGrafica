@@ -10,25 +10,21 @@ class CanoCurvado(Objeto3D):
         vertices = []
         faces = []
 
-        ponto_anterior = None
-        vetor_up_global = [0, 1, 0]  # Vetor "para cima" de referência
+        tangente = [0, 0, 0]
 
         for i in range(segs_espinha + 1):
+            vetor_up_global = [0, 1, 0]
             t = i / segs_espinha
 
-            # 1. Encontrar o ponto e a tangente na curva
             ponto_atual = avaliar_bezier_cubica(pontos_de_controle[0], pontos_de_controle[1], pontos_de_controle[2],
                                                 pontos_de_controle[3], t)
 
-            # Aproximar a tangente
             if t < 1.0:
                 ponto_seguinte = avaliar_bezier_cubica(pontos_de_controle[0], pontos_de_controle[1],
                                                        pontos_de_controle[2], pontos_de_controle[3], t + 0.001)
                 tangente = normalizar_vetor(subtrair_vetores(ponto_seguinte, ponto_atual))
-            else:
-                tangente = tangente
 
-            if abs(tangente[1]) > 0.99:
+            if abs(tangente[0]) < 1e-6 and abs(tangente[2]) < 1e-6:
                 vetor_up_global = [1, 0, 0]
 
             eixo_x = normalizar_vetor(produto_vetorial(tangente, vetor_up_global))

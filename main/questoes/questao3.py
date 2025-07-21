@@ -5,26 +5,23 @@ from main.utils import multiplicar_matriz_por_vetor, criar_matriz_view
 
 
 def questao3(objetos_da_cena):
-    # --- NOVA SEÇÃO: CONFIGURAÇÃO DA CÂMERA (Requisito 3) ---
     # a. Escolha um ponto como origem para o sistema de coordenadas da câmera.
     pos_camera = [15, 10, 20]
-    ponto_alvo = [0, 0, 0]          # Ponto para o qual a câmera está olhando.
-    vetor_up_mundo = [0, 1, 0]       # Vetor que aponta para cima no mundo.
-
+    ponto_alvo = [0, 0, 0]
+    vetor_up_mundo = [0, 1, 0]
     # b. Compute a base vetorial e crie a Matriz de Visualização.
     matriz_view = criar_matriz_view(pos_camera, ponto_alvo, vetor_up_mundo)
 
 
-    # --- RENDERIZAÇÃO DA VISÃO DA CÂMERA (Requisito 3c) ---
+    #Requisito 3c)
     fig = plt.figure(figsize=(12, 9))
     ax = fig.add_subplot(111, projection='3d')
 
-    # MODIFICADO: Loop de renderização agora transforma para o espaço da câmera.
     for obj in objetos_da_cena:
-        # 1. Pega os vértices do objeto já na sua posição no mundo.
+        #  Pega os vértices do objeto já na sua posição no mundo.
         vertices_mundo = obj.obter_vertices_transformados()
 
-        # 2. b. Transforma os vértices do mundo para o sistema de coordenadas da câmera.
+        #  b. Transforma os vértices do mundo para o sistema de coordenadas da câmera.
         vertices_camera = []
         for v_mundo in vertices_mundo:
             v_homogeneo = v_mundo + [1] # Adiciona w=1 para multiplicação da matriz 4x4

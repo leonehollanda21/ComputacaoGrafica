@@ -13,7 +13,6 @@ class CanoReto(Objeto3D):
             angulo = 2 * math.pi * i / segmentos
             x = raio * math.cos(angulo)
             y = raio * math.sin(angulo)
-            # Vértice na base e no topo
             vertices.append([x, y, 0])
             vertices.append([x, y, comprimento])
 
