@@ -11,21 +11,15 @@ class Paralelepipedo(Objeto3D):
         ]
 
         faces = [
-            # Face Frontal (virada para -Z)
             [0, 2, 1], [0, 3, 2],
-
             # Face Traseira (virada para +Z)
             [4, 5, 6], [4, 6, 7],
-
             # Face Esquerda (virada para -X)
             [4, 3, 0], [4, 7, 3],
-
             # Face Direita (virada para +X)
             [1, 2, 6], [1, 6, 5],
-
             # Face Inferior (virada para -Y)
             [0, 5, 1], [0, 4, 5],
-
             # Face Superior (virada para +Y)
             [3, 6, 2], [3, 7, 6]
         ]

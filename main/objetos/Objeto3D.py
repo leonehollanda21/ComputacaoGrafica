@@ -6,7 +6,6 @@ class Objeto3D:
         self.vertices = [v + [1] for v in vertices]
         self.faces = faces
         self.cor = cor
-
         self.matriz_transformacao = criar_matriz_identidade()
 
     def aplicar_transformacao(self, matriz):

@@ -9,6 +9,7 @@ from main.objetos.linha_reta import LinhaReta
 from main.objetos.paralelepípedo import Paralelepipedo
 from main.questoes.questao3 import questao3
 from main.questoes.questao4 import questao4
+from main.questoes.questao5 import questao5
 from main.utils import criar_matriz_translacao, criar_matriz_rotacao_y, criar_matriz_view, multiplicar_matriz_por_vetor
 
 meu_paralelepipedo = Paralelepipedo(base=2, altura=2, comprimento=2, cor='cyan')
@@ -83,4 +84,4 @@ questao4(objetos_da_cena)
 
 resolucoes_desejadas = [(301, 226), (1201, 901), (4801, 3601), (200,500)]
 
-#questao5(objetos_da_cena, resolucoes_desejadas)
+questao5(objetos_da_cena, resolucoes_desejadas)

@@ -129,7 +129,7 @@ def calcular_coordenadas_baricentricas(ponto, v0, v1, v2):
     # Usando a fórmula baseada em área
     denominador = (v1[1] - v2[1]) * (v0[0] - v2[0]) + (v2[0] - v1[0]) * (v0[1] - v2[1])
     if denominador == 0:
-        return None # Triângulo degenerado
+        return None 
 
     w0 = ((v1[1] - v2[1]) * (ponto[0] - v2[0]) + (v2[0] - v1[0]) * (ponto[1] - v2[1])) / denominador
     w1 = ((v2[1] - v0[1]) * (ponto[0] - v2[0]) + (v0[0] - v2[0]) * (ponto[1] - v2[1])) / denominador
