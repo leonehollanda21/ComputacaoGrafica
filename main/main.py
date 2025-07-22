@@ -10,6 +10,7 @@ from main.objetos.paralelepípedo import Paralelepipedo
 from main.questoes.questao3 import questao3
 from main.questoes.questao4 import questao4
 from main.questoes.questao5 import questao5
+from main.questoes.questao4_visualizacao import questao4_visualizacao
 from main.utils import criar_matriz_translacao, criar_matriz_rotacao_y, criar_matriz_view, multiplicar_matriz_por_vetor
 
 meu_paralelepipedo = Paralelepipedo(base=2, altura=2, comprimento=2, cor='cyan')
@@ -81,6 +82,9 @@ plt.show()
 
 questao3(objetos_da_cena)
 questao4(objetos_da_cena)
+# Mostra a visualização 3D que explica o processo de projeção
+print("Executando Questão 4.2: Visualização do Frustum...")
+questao4_visualizacao(objetos_da_cena)
 
 resolucoes_desejadas = [(301, 226), (1201, 901), (4801, 3601), (200,500)]
 
