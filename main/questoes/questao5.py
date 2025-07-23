@@ -55,11 +55,9 @@ def questao5(objetos_da_cena, resolucoes):
         pixels = imagem.load()
         z_buffer = [[float('inf')] * altura for _ in range(largura)]
 
-        # --- Preenche os polígonos dos sólidos ---
         for i, obj in enumerate(objetos_da_cena):
             if not obj.faces: continue
             for face in obj.faces:
-                # ... (código de preenchimento com z-buffer permanece o mesmo) ...
                 v_proj = [vertices_projetados_por_objeto[i][idx] for idx in face]
                 vertices_pixel = [];
                 profundidades = []
@@ -86,12 +84,10 @@ def questao5(objetos_da_cena, resolucoes):
                                 z_buffer[x][y] = profundidade_pixel
                                 pixels[x, y] = mapa_de_cores[obj.cor]
 
-        # --- Desenha a malha (wireframe) dos sólidos ---
         cor_malha = (0, 0, 0)
         for i, obj in enumerate(objetos_da_cena):
             if not obj.faces: continue
             for face in obj.faces:
-                # ... (código de desenho da malha permanece o mesmo) ...
                 v_proj = [vertices_projetados_por_objeto[i][idx] for idx in face]
                 vertices_pixel = []
                 for v in v_proj:
@@ -106,18 +102,13 @@ def questao5(objetos_da_cena, resolucoes):
                 desenhar_linha_bresenham(v1, v2, pixels, cor_malha, largura, altura)
                 desenhar_linha_bresenham(v2, v0, pixels, cor_malha, largura, altura)
 
-        # --- NOVO: Loop para desenhar objetos baseados em arestas (a Linha Reta) ---
         for i, obj in enumerate(objetos_da_cena):
-            # A condição agora é: o objeto TEM arestas, mas NÃO TEM faces.
             if hasattr(obj, 'edges') and not obj.faces:
-                # Pega os vértices da linha já projetados
                 v_proj_linha = vertices_projetados_por_objeto[i]
 
-                # Itera sobre as arestas do objeto (a linha só tem uma)
                 for edge in obj.edges:
                     p1_proj, p2_proj = v_proj_linha[edge[0]], v_proj_linha[edge[1]]
 
-                    # Transforma os dois pontos para coordenadas de pixel
                     p_pixel = []
                     for v in [p1_proj, p2_proj]:
                         w = v[3]
@@ -128,12 +119,10 @@ def questao5(objetos_da_cena, resolucoes):
                         else:
                             p_pixel.append(None)
 
-                    # Desenha a linha se os dois pontos forem válidos
                     if all(p_pixel):
                         p1, p2 = p_pixel
                         desenhar_linha_bresenham(p1, p2, pixels, mapa_de_cores[obj.cor], largura, altura)
 
-        # Salva a imagem final
         nome_arquivo = f"raster_final_com_malha_{largura}x{altura}.png"
         imagem.save(nome_arquivo)
         print(f"Imagem rasterizada salva como: {nome_arquivo}")

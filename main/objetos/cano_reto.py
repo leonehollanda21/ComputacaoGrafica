@@ -20,7 +20,6 @@ class CanoReto(Objeto3D):
         for i in range(segmentos):
             idx_base_atual = i * 2
             idx_topo_atual = i * 2 + 1
-            # O operador '%' garante que o último segmento se conecte ao primeiro
             idx_base_prox = ((i + 1) % segmentos) * 2
             idx_topo_prox = ((i + 1) % segmentos) * 2 + 1
 

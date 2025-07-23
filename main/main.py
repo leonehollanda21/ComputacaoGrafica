@@ -37,7 +37,6 @@ minha_linha.aplicar_transformacao(trans_l)
 # Cano Curvado é movido para baixo, no centro
 trans_cc = criar_matriz_translacao(-2, -5, -2)
 meu_cano_curvado.aplicar_transformacao(trans_cc)
-# c. Crie a lista final com todos os objetos da cena
 objetos_da_cena = [
     meu_paralelepipedo,
     meu_cilindro,
@@ -45,11 +44,8 @@ objetos_da_cena = [
     minha_linha,
     meu_cano_curvado
 ]
-# --- 2. RENDERIZAÇÃO ---
-# a. Configure a figura e os eixos 3D
 fig = plt.figure(figsize=(12, 9))
 ax = fig.add_subplot(111, projection='3d')
-# b. Loop de renderização que desenha todos os objetos
 for obj in objetos_da_cena:
     vertices_mundo = obj.obter_vertices_transformados()
     if obj.faces:
@@ -86,6 +82,6 @@ questao4(objetos_da_cena)
 print("Executando Questão 4.2: Visualização do Frustum...")
 questao4_visualizacao(objetos_da_cena)
 
-resolucoes_desejadas = [(301, 226), (1201, 901), (4801, 3601), (200,500)]
+resolucoes_desejadas = [(320, 180), (640, 360), (960, 540), (1280, 720)]
 
 questao5(objetos_da_cena, resolucoes_desejadas)

@@ -2,7 +2,6 @@ import math
 from matplotlib import pyplot as plt
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 
-# Importe as funções de utilidades necessárias
 from main.utils import (
     criar_matriz_view,
     criar_matriz_projecao_perspectiva,
@@ -11,15 +10,7 @@ from main.utils import (
 
 
 def questao4_visualizacao(objetos_da_cena):
-    """
-    Gera uma figura única com dois sub-plots:
-    1. A visualização 3D do processo de projeção (com frustum).
-    2. O resultado final da projeção em 2D.
-    """
-    # --- PASSO 1: Cálculos Compartilhados ---
-    # Realiza todas as transformações uma única vez.
 
-    # Parâmetros da Câmera e da Projeção
     pos_camera = [12, 9, 14]
     ponto_alvo = [0, 0, 0]
     vetor_up_mundo = [0, 1, 0]
@@ -53,19 +44,15 @@ def questao4_visualizacao(objetos_da_cena):
         vertices_camera_3d_por_obj.append(v_cam_3d_obj)
         vertices_2d_finais_por_obj.append(v_2d_final_obj)
 
-    # --- PASSO 2: Configurar a Figura e os Sub-plots ---
     fig = plt.figure(figsize=(18, 9))  # Figura larga para caber os dois gráficos
     fig.suptitle("Questão 4: Processo de Projeção e Resultado Final", fontsize=16)
 
-    # Painel da Esquerda: Gráfico 3D
     ax_3d = fig.add_subplot(1, 2, 1, projection='3d')
     ax_3d.set_title("Visualização do Processo (Espaço da Câmera)")
 
-    # Painel da Direita: Gráfico 2D
     ax_2d = fig.add_subplot(1, 2, 2)
     ax_2d.set_title("Resultado da Projeção (Plano 2D)")
 
-    # --- PASSO 3: Desenhar no Painel 3D (Esquerda) ---
     for i, obj in enumerate(objetos_da_cena):
         vertices_camera = vertices_camera_3d_por_obj[i]
         if obj.faces:
@@ -77,7 +64,6 @@ def questao4_visualizacao(objetos_da_cena):
                 p1, p2 = [vertices_camera[idx] for idx in edge]
                 ax_3d.plot([p1[0], p2[0]], [p1[1], p2[1]], [p1[2], p2[2]], color=obj.cor, linewidth=3)
 
-    # Desenha o frustum no painel 3D
     altura_far = 2 * far * math.tan(math.radians(fov / 2));
     largura_far = altura_far * aspect_ratio
     fc = [0, 0, -far];
@@ -95,7 +81,6 @@ def questao4_visualizacao(objetos_da_cena):
     ax_3d.plot([ftr[0], ftl[0]], [ftr[1], ftl[1]], [ftr[2], ftl[2]], color='red', lw=1);
     ax_3d.plot([ftl[0], fbl[0]], [ftl[1], fbl[1]], [ftl[2], fbl[2]], color='red', lw=1)
 
-    # Marcadores no painel 3D
     origem_na_visao_camera = multiplicar_matriz_por_vetor(matriz_view, [0, 0, 0, 1])
     ax_3d.scatter(origem_na_visao_camera[0], origem_na_visao_camera[1], origem_na_visao_camera[2], color='yellow',
                   s=100, ec='black', label='Origem do Mundo')
@@ -106,7 +91,6 @@ def questao4_visualizacao(objetos_da_cena):
     ax_3d.legend()
     ax_3d.view_init(elev=25, azim=-80)
 
-    # --- PASSO 4: Desenhar no Painel 2D (Direita) ---
     for i, obj in enumerate(objetos_da_cena):
         vertices_2d_finais = vertices_2d_finais_por_obj[i]
         if obj.faces:
@@ -127,10 +111,6 @@ def questao4_visualizacao(objetos_da_cena):
     ax_2d.set_xlim(-1.2, 1.2);
     ax_2d.set_ylim(-1.2, 1.2)
 
-    # --- PASSO 5: Exibir a Figura ---
-    plt.tight_layout(rect=[0, 0.03, 1, 0.95])  # Ajusta o layout para o título não sobrepor
+    plt.tight_layout(rect=[0, 0.03, 1, 0.95])
     plt.show()
 
-# Para usar no seu main.py:
-# from main.questoes.questao4_completa import questao4_completa
-# questao4_completa(objetos_da_cena)
