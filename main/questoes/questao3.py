@@ -7,7 +7,6 @@ from main.utils import multiplicar_matriz_por_vetor, criar_matriz_view
 def questao3(objetos_da_cena):
     pos_camera = [5, -5, 10]
     ponto_alvo = [5, 5, 0]
-    # Vetor "up"
     vetor_up_mundo = [0, 1, 0]
 
     matriz_view = criar_matriz_view(pos_camera, ponto_alvo, vetor_up_mundo)
@@ -54,7 +53,6 @@ def questao3(objetos_da_cena):
         color='red', linestyle='--', linewidth=2, label='Vetor de Visão (Origem -> Câmera)'
     )
 
-    # --- Configurações do Gráfico ---
     ax.set_title("Cena Transformada para o Sistema de Coordenadas da Câmera")
     ax.set_xlabel('Eixo X da Câmera (xc)')
     ax.set_ylabel('Eixo Y da Câmera (yc)')

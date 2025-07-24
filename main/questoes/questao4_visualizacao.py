@@ -19,11 +19,9 @@ def questao4_visualizacao(objetos_da_cena):
     near = 1.0;
     far = 20.0
 
-    # Cria as matrizes
     matriz_view = criar_matriz_view(pos_camera, ponto_alvo, vetor_up_mundo)
     matriz_projecao = criar_matriz_projecao_perspectiva(fov, aspect_ratio, near, far)
 
-    # Transforma todos os vértices e armazena os resultados 3D (câmera) e 2D (final)
     vertices_camera_3d_por_obj = []
     vertices_2d_finais_por_obj = []
     for obj in objetos_da_cena:
@@ -44,7 +42,7 @@ def questao4_visualizacao(objetos_da_cena):
         vertices_camera_3d_por_obj.append(v_cam_3d_obj)
         vertices_2d_finais_por_obj.append(v_2d_final_obj)
 
-    fig = plt.figure(figsize=(18, 9))  # Figura larga para caber os dois gráficos
+    fig = plt.figure(figsize=(18, 9))
     fig.suptitle("Questão 4: Processo de Projeção e Resultado Final", fontsize=16)
 
     ax_3d = fig.add_subplot(1, 2, 1, projection='3d')

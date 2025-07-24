@@ -8,17 +8,15 @@ class Cilindro(Objeto3D):
         vertices = []
         faces = []
 
-        # vertices das bases usando
         for i in range(segmentos):
             angulo = 2 * math.pi * i / segmentos
             x, y = raio * math.cos(angulo), raio * math.sin(angulo)
             vertices.append([x, y, 0])
             vertices.append([x, y, altura])
 
-        vertices.append([0, 0, 0])  # Centro da base
-        vertices.append([0, 0, altura])  # Centro do topo
+        vertices.append([0, 0, 0])
+        vertices.append([0, 0, altura])
 
-        # gerar faces permanece a mesma
         centro_base_idx = len(vertices) - 2
         centro_topo_idx = len(vertices) - 1
 

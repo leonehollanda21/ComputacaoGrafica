@@ -8,7 +8,6 @@ class CanoReto(Objeto3D):
         vertices = []
         faces = []
 
-        # Gerar os anéis de vértices nas duas extremidades
         for i in range(segmentos):
             angulo = 2 * math.pi * i / segmentos
             x = raio * math.cos(angulo)
@@ -16,14 +15,12 @@ class CanoReto(Objeto3D):
             vertices.append([x, y, 0])
             vertices.append([x, y, comprimento])
 
-        # Gerar as faces laterais (a superfície do cano)
         for i in range(segmentos):
             idx_base_atual = i * 2
             idx_topo_atual = i * 2 + 1
             idx_base_prox = ((i + 1) % segmentos) * 2
             idx_topo_prox = ((i + 1) % segmentos) * 2 + 1
 
-            # Criar a face retangular lateral com dois triângulos
             faces.append([idx_base_atual, idx_base_prox, idx_topo_atual])
             faces.append([idx_base_prox, idx_topo_prox, idx_topo_atual])
 

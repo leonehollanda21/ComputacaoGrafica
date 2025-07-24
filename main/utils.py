@@ -126,7 +126,6 @@ def criar_matriz_projecao_perspectiva(fov_graus, aspect_ratio, near, far):
 
 def calcular_coordenadas_baricentricas(ponto, v0, v1, v2):
 
-    # Usando a fórmula baseada em área
     denominador = (v1[1] - v2[1]) * (v0[0] - v2[0]) + (v2[0] - v1[0]) * (v0[1] - v2[1])
     if denominador == 0:
         return None 
@@ -138,7 +137,6 @@ def calcular_coordenadas_baricentricas(ponto, v0, v1, v2):
     return w0, w1, w2
 
 
-# NOVO: Função para desenhar linhas (Algoritmo de Bresenham)
 def desenhar_linha_bresenham(p1, p2, pixels, cor, largura, altura):
     x1, y1 = p1; x2, y2 = p2
     dx = abs(x2 - x1); sx = 1 if x1 < x2 else -1
@@ -152,3 +150,28 @@ def desenhar_linha_bresenham(p1, p2, pixels, cor, largura, altura):
         if e2 <= dx: err += dx; y1 += sy
 matriz_rot_90_graus_y = criar_matriz_rotacao_y(math.pi / 2)
 
+
+def desenhar_linha_simples(p1, p2, pixels, cor, largura, altura):
+    x1, y1 = int(p1[0]), int(p1[1])
+    x2, y2 = int(p2[0]), int(p2[1])
+
+    dx = x2 - x1
+    dy = y2 - y1
+
+    passos = max(abs(dx), abs(dy))
+
+    if passos == 0:
+        if 0 <= x1 < largura and 0 <= y1 < altura:
+            pixels[x1, y1] = cor
+        return
+
+    x_incremento = dx / passos
+    y_incremento = dy / passos
+
+    x, y = float(x1), float(y1)
+    for _ in range(passos + 1):
+        px, py = round(x), round(y)
+        if 0 <= px < largura and 0 <= py < altura:
+            pixels[px, py] = cor
+        x += x_incremento
+        y += y_incremento

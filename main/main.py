@@ -17,24 +17,18 @@ meu_paralelepipedo = Paralelepipedo(base=2, altura=2, comprimento=2, cor='cyan')
 meu_cilindro = Cilindro(raio=1, altura=4, cor='magenta')
 meu_cano_reto = CanoReto(raio=0.8, comprimento=5, cor='orange')
 minha_linha = LinhaReta(tamanho=8, cor='black')
-#curva do cano curvado
 pontos_bezier = [[0, 0, 0], [0, 4, 0], [4, 4, 0], [4, 0, 0]]
 meu_cano_curvado = CanoCurvado(raio=0.5, pontos_de_controle=pontos_bezier, cor='indigo')
-# Paralelepípedo vai para o canto X positivo, Y positivo
 trans_p = criar_matriz_translacao(5, 5, 0)
 meu_paralelepipedo.aplicar_transformacao(trans_p)
-# Cilindro vai para o canto X negativo, Y positivo
 trans_c = criar_matriz_translacao(-5, 5, 0)
 meu_cilindro.aplicar_transformacao(trans_c)
-# Cano Reto será rotacionado para ficar deitado e movido para Y negativo
-rot_cr = criar_matriz_rotacao_y(math.pi / 2)  # Rotaciona 90 graus
+rot_cr = criar_matriz_rotacao_y(math.pi / 2)
 trans_cr = criar_matriz_translacao(0, -6, 0)
 meu_cano_reto.aplicar_transformacao(rot_cr)
 meu_cano_reto.aplicar_transformacao(trans_cr)
-# Linha Reta é movida para a frente no eixo Z
 trans_l = criar_matriz_translacao(0, 0, 5)
 minha_linha.aplicar_transformacao(trans_l)
-# Cano Curvado é movido para baixo, no centro
 trans_cc = criar_matriz_translacao(-2, -5, -2)
 meu_cano_curvado.aplicar_transformacao(trans_cc)
 objetos_da_cena = [
@@ -78,8 +72,6 @@ plt.show()
 
 questao3(objetos_da_cena)
 questao4(objetos_da_cena)
-# Mostra a visualização 3D que explica o processo de projeção
-print("Executando Questão 4.2: Visualização do Frustum...")
 questao4_visualizacao(objetos_da_cena)
 
 resolucoes_desejadas = [(320, 180), (640, 360), (960, 540), (1280, 720)]

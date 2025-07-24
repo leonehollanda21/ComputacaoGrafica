@@ -28,7 +28,6 @@ def questao4(objetos_da_cena):
     for obj in objetos_da_cena:
         vertices_mundo = obj.obter_vertices_transformados()
 
-        # Transforma todos os vértices para o espaço 2D final
         vertices_2d_finais = []
         for v_mundo in vertices_mundo:
             v_homogeneo = v_mundo + [1]
@@ -50,7 +49,6 @@ def questao4(objetos_da_cena):
                 p2 = vertices_2d_finais[p2_idx] if p2_idx < len(vertices_2d_finais) else None
                 p3 = vertices_2d_finais[p3_idx] if p3_idx < len(vertices_2d_finais) else None
 
-                # Desenha as 3 arestas do triângulo, verificando se os pontos são válidos
                 if p1 and p2: ax.plot([p1[0], p2[0]], [p1[1], p2[1]], color=obj.cor, solid_capstyle='round', lw=1)
                 if p2 and p3: ax.plot([p2[0], p3[0]], [p2[1], p3[1]], color=obj.cor, solid_capstyle='round', lw=1)
                 if p3 and p1: ax.plot([p3[0], p1[0]], [p3[1], p1[1]], color=obj.cor, solid_capstyle='round', lw=1)
@@ -61,7 +59,6 @@ def questao4(objetos_da_cena):
                 if p1 and p2:
                     ax.plot([p1[0], p2[0]], [p1[1], p2[1]], color=obj.cor, linewidth=2)
 
-    # Configurações Finais do Plot 2D
     ax.set_title("Projeção 2D com Malha Completa (Sem Culling - Questão 4)")
     ax.set_xlabel("Eixo X da Tela (Normalizado)")
     ax.set_ylabel("Eixo Y da Tela (Normalizado)")
